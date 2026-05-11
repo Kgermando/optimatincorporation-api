@@ -1,0 +1,53 @@
+# ── Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+optimatincorporation-api
+/bin/
+/dist/
+
+# ── Build cache
+/tmp/
+*.out
+*.test
+*.prof
+
+# ── Environment & secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.cert
+*.p12
+
+# ── Go modules cache
+vendor/
+
+# ── IDE
+.idea/
+.vscode/
+*.suo
+*.user
+*.swp
+*.swo
+*~
+
+# ── OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs
+*.log
+logs/
+
+# ── Uploads / storage locaux
+storage/uploads/
+uploads/
+
+# ── Air (live reload)
+tmp/
+.air.toml
