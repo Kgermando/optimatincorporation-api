@@ -8,7 +8,7 @@ import (
 
 func GetServices(c *fiber.Ctx) error {
 	var items []models.Service
-	if err := database.DB.Where("published = true").Order("`order` asc, created_at asc").Find(&items).Error; err != nil {
+	if err := database.DB.Where("published = true").Order(`"order" asc, created_at asc`).Find(&items).Error; err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": err.Error()})
 	}
 	return c.JSON(fiber.Map{"data": items})

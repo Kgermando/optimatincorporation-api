@@ -41,7 +41,7 @@ type Service struct {
 	Title       string         `gorm:"not null" json:"title"`
 	Subtitle    string         `json:"subtitle"`
 	Description string         `json:"description"`
-	Icon        string         `json:"icon"`
+	IconURL     string         `json:"icon_url"`
 	Features    pq.StringArray `gorm:"type:text[]" json:"features"`
 	Order       int            `gorm:"default:0" json:"order"`
 	Published   bool           `gorm:"default:true" json:"published"`

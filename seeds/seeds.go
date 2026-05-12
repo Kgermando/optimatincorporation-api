@@ -27,14 +27,14 @@ func seedUsers(db *gorm.DB) {
 		return
 	}
 
-	hash, err := bcrypt.GenerateFromPassword([]byte("Admin@optimat2025"), bcrypt.DefaultCost)
+	hash, err := bcrypt.GenerateFromPassword([]byte("Admin@optimat2026"), bcrypt.DefaultCost)
 	if err != nil {
 		log.Println("[seed] error hashing admin password:", err)
 		return
 	}
 
 	users := []models.User{
-		{Name: "Admin OPTIMAT", Email: "admin@optimat.cd", Password: string(hash), Role: "admin"},
+		{Name: "Admin OPTIMAT", Email: "admin@optimat.com", Password: string(hash), Role: "admin"},
 	}
 
 	if err := db.Create(&users).Error; err != nil {
@@ -58,7 +58,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Long-métrage",
 			Subtitle:    "10 à 90 minutes",
 			Description: "Films d'animation 3D captivants pour les enfants et familles, allant de 10 à 90 minutes.",
-			Icon:        "🎬",
+			IconURL: "",
 			Features:    pq.StringArray{"Scénario complet", "Animation 3D haute résolution", "Post-production", "Musique originale"},
 			Order:       1,
 			Published:   true,
@@ -67,7 +67,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Court-métrage",
 			Subtitle:    "Illustration de projets",
 			Description: "Nos courts-métrages vidéo illustrent parfaitement vos projets avec créativité et impact.",
-			Icon:        "📺",
+			IconURL: "",
 			Features:    pq.StringArray{"2 à 10 minutes", "Rendu photoréaliste", "Livraison rapide", "Tous formats"},
 			Order:       2,
 			Published:   true,
@@ -76,7 +76,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Moyen-métrage",
 			Subtitle:    "Documentaires & simulations",
 			Description: "Productions de moyen-métrages pour documentaires institutionnels et simulations 3D immersives.",
-			Icon:        "🎥",
+			IconURL: "",
 			Features:    pq.StringArray{"10 à 40 minutes", "Simulation réaliste", "Narration professionnelle", "Diffusion TV"},
 			Order:       3,
 			Published:   true,
@@ -85,7 +85,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Animation 3D",
 			Subtitle:    "Création pure",
 			Description: "Animations 3D innovantes pour donner vie à vos idées et projets avec un réalisme saisissant.",
-			Icon:        "✨",
+			IconURL: "",
 			Features:    pq.StringArray{"Personnages 3D", "Environnements", "Effets spéciaux", "VFX"},
 			Order:       4,
 			Published:   true,
@@ -94,7 +94,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Motion Graphique",
 			Subtitle:    "Dynamisme visuel",
 			Description: "Création de motion graphics pour des visuels dynamiques, attrayants et mémorables.",
-			Icon:        "📊",
+			IconURL: "",
 			Features:    pq.StringArray{"Infographies animées", "Titrage", "Transition", "Logo animation"},
 			Order:       5,
 			Published:   true,
@@ -103,7 +103,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Spots Publicitaires",
 			Subtitle:    "Marketing impactant",
 			Description: "Production de spots publicitaires percutants pour promouvoir efficacement vos produits.",
-			Icon:        "📡",
+			IconURL: "",
 			Features:    pq.StringArray{"15 à 60 secondes", "Concept créatif", "Musique et voix", "Multi-plateformes"},
 			Order:       6,
 			Published:   true,
@@ -112,7 +112,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Communication Institutionnelle",
 			Subtitle:    "Image de marque",
 			Description: "Supports de communication institutionnelle pour renforcer votre image et votre identité.",
-			Icon:        "🏢",
+			IconURL: "",
 			Features:    pq.StringArray{"Présentation entreprise", "Rapport annuel", "Brand film", "Visite virtuelle"},
 			Order:       7,
 			Published:   true,
@@ -121,7 +121,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Présentation de Projets",
 			Subtitle:    "Convaincre et séduire",
 			Description: "Supports visuels percutants pour des présentations de projets qui laissent une impression durable.",
-			Icon:        "📋",
+			IconURL: "",
 			Features:    pq.StringArray{"Visualisation architecturale", "Simulation technique", "Rendu 3D", "VR/AR"},
 			Order:       8,
 			Published:   true,
@@ -130,7 +130,7 @@ func seedServices(db *gorm.DB) {
 			Title:       "Documentaires Institutionnels",
 			Subtitle:    "Racontez votre histoire",
 			Description: "Production de documentaires pour raconter l'histoire et les valeurs de votre organisation.",
-			Icon:        "🎞️",
+			IconURL: "",
 			Features:    pq.StringArray{"Interviews", "Animation 3D", "Archives", "Diffusion"},
 			Order:       9,
 			Published:   true,
@@ -156,57 +156,57 @@ func seedTeam(db *gorm.DB) {
 	members := []models.TeamMember{
 		{
 			Name:     "Julio Fernando",
-			Position: "Directeur Général",
-			Bio:      "Fondateur et visionnaire d'OPTIMAT Incorporation, Julio Fernando dirige l'entreprise avec passion depuis 2016.",
+			Position: "Directeur général",
+			Bio:      "Fondateur et visionnaire d'OPTIMAT Incorporation, Julio Fernando dirige l'entreprise avec passion depuis 2016. Il pilote la stratégie globale et incarne l'ambition du studio à l'échelle nationale et africaine.",
 			PhotoURL: "/images/teams/PHOTO OPTIMAT_Fernando.png",
 			Order:    1,
 		},
 		{
 			Name:     "Laeticia SHOMA",
-			Position: "Directrice Administrative & Financière",
-			Bio:      "Responsable de la gestion administrative et financière de l'entreprise.",
+			Position: "Directrice Chargée de L'Administratif & Financier",
+			Bio:      "Laeticia SHOMA supervise l'ensemble des opérations administratives et financières d'OPTIMAT Incorporation, garantissant la santé économique et la rigueur de gestion de l'entreprise.",
 			PhotoURL: "/images/teams/PHOTO OPTIMAT_Laeticia.png",
 			Order:    2,
 		},
 		{
 			Name:     "Yannick Lufuluabo LFK",
-			Position: "Directeur Production 3D",
-			Bio:      "Responsable de toutes les productions 3D et de l'excellence technique des projets.",
+			Position: "Directeur Chargé De la Production 3D",
+			Bio:      "Yannick Lufuluabo LFK est le garant de l'excellence technique des productions 3D d'OPTIMAT. Il encadre les équipes de modélisation, d'animation et de rendu pour livrer des projets de haute qualité.",
 			PhotoURL: "/images/teams/PHOTO OPTIMAT_Yannick.png",
 			Order:    3,
 		},
 		{
 			Name:     "Betty Stéphanie MBUYI",
-			Position: "Directrice Études & Projets",
-			Bio:      "En charge des études de projets et de la planification des productions.",
+			Position: "Directrice Chargée D'Études & Projets",
+			Bio:      "Betty Stéphanie MBUYI coordonne les études de faisabilité et la planification des projets de production, assurant le respect des délais et des objectifs définis avec les clients.",
 			PhotoURL: "/images/teams/PHOTO OPTIMAT_Betty_2.png",
 			Order:    4,
 		},
 		{
-			Name:     "Mbinza Odine",
-			Position: "Directrice Artistique & Design",
-			Bio:      "Créatrice de l'identité visuelle et artistique de toutes les productions OPTIMAT.",
+			Name:     "Mbinza odine",
+			Position: "Directrice Chargée Artistique & Design",
+			Bio:      "Mbinza odine définit l'identité visuelle et artistique de toutes les productions OPTIMAT. Son sens du détail et sa créativité donnent à chaque projet une signature unique et mémorable.",
 			PhotoURL: "/images/teams/PHOTO OPTIMAT_Odine.png",
 			Order:    5,
 		},
 		{
 			Name:     "Loïc Imidy",
-			Position: "Directeur Partenariats Commerciaux",
-			Bio:      "Développe les partenariats stratégiques et les relations commerciales.",
+			Position: "Directeur Chargé des Partenariats commercial",
+			Bio:      "Loïc Imidy développe et consolide les partenariats stratégiques d'OPTIMAT Incorporation, en créant des relations durables avec les clients, institutions et partenaires commerciaux.",
 			PhotoURL: "/images/teams/PHOTO OPTIMAT_Loic.png",
 			Order:    6,
 		},
 		{
 			Name:     "Mariana Dioma",
-			Position: "Directrice de la Création",
-			Bio:      "Supervise l'ensemble du processus créatif et de la direction artistique.",
+			Position: "Directrice Chargée de La Création",
+			Bio:      "Mariana Dioma pilote le processus créatif d'OPTIMAT de bout en bout, de l'idéation à la réalisation, en veillant à l'originalité et à la cohérence artistique de chaque production.",
 			PhotoURL: "/images/teams/PHOTO OPTIMAT_Mariana Dioma.png",
 			Order:    7,
 		},
 		{
 			Name:     "Grâce MUBANGI",
-			Position: "Directrice Juridique & Marchés",
-			Bio:      "Gère les aspects juridiques, les contrats et la passation des marchés.",
+			Position: "Directrice Chargée de Passation des Marchés & Juridique",
+			Bio:      "Grâce MUBANGI gère les aspects juridiques, la rédaction des contrats et la passation des marchés d'OPTIMAT Incorporation, garantissant la conformité légale de toutes les activités de l'entreprise.",
 			PhotoURL: "/images/teams/PHOTO OPTIMAT_Grace.png",
 			Order:    8,
 		},
