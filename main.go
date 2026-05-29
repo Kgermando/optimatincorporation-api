@@ -71,8 +71,8 @@ func main() {
 	p.Put("/users/:id", handlers.UpdateUser)
 	p.Delete("/users/:id", handlers.DeleteUser)
 
-	p.Post("/upload", handlers.UploadFile)
-	p.Delete("/upload", handlers.DeleteFile)
+	api.Post("/upload", handlers.UploadFile)
+	api.Delete("/upload", handlers.DeleteFile)
 
 	log.Printf("Server running on port %s", cfg.Port)
 	log.Fatal(app.Listen(":" + cfg.Port))
