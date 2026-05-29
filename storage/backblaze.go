@@ -42,6 +42,9 @@ type b2UploadFileResponse struct {
 
 // Authorize authenticates with B2 and returns auth info
 func (b *B2Client) authorize() (*b2AuthResponse, error) {
+	if b.KeyID == "" || b.ApplicationKey == "" {
+		return nil, fmt.Errorf("B2 credentials not configured (B2_KEY_ID / B2_APPLICATION_KEY missing)")
+	}
 	req, _ := http.NewRequest("GET", B2AuthURL, nil)
 	req.SetBasicAuth(b.KeyID, b.ApplicationKey)
 
@@ -51,8 +54,13 @@ func (b *B2Client) authorize() (*b2AuthResponse, error) {
 	}
 	defer resp.Body.Close()
 
+	body, _ := io.ReadAll(resp.Body)
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("B2 authorize failed (%d): %s", resp.StatusCode, string(body))
+	}
+
 	var auth b2AuthResponse
-	if err := json.NewDecoder(resp.Body).Decode(&auth); err != nil {
+	if err := json.Unmarshal(body, &auth); err != nil {
 		return nil, err
 	}
 	return &auth, nil
@@ -70,8 +78,13 @@ func (b *B2Client) getUploadURL(auth *b2AuthResponse) (*b2UploadURLResponse, err
 	}
 	defer resp.Body.Close()
 
+	respBody, _ := io.ReadAll(resp.Body)
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("B2 get_upload_url failed (%d): %s", resp.StatusCode, string(respBody))
+	}
+
 	var uploadURL b2UploadURLResponse
-	if err := json.NewDecoder(resp.Body).Decode(&uploadURL); err != nil {
+	if err := json.Unmarshal(respBody, &uploadURL); err != nil {
 		return nil, err
 	}
 	return &uploadURL, nil
@@ -109,8 +122,13 @@ func (b *B2Client) Upload(fileData []byte, fileName, contentType, folder string)
 	}
 	defer resp.Body.Close()
 
+	respBody, _ := io.ReadAll(resp.Body)
+	if resp.StatusCode != http.StatusOK {
+		return "", "", fmt.Errorf("B2 upload failed (%d): %s", resp.StatusCode, string(respBody))
+	}
+
 	var result b2UploadFileResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+	if err := json.Unmarshal(respBody, &result); err != nil {
 		return "", "", err
 	}
 
